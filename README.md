@@ -74,31 +74,37 @@ role:
 ```
 - Atualizar lista de funções no arquivo serverless.yml
 ```
-functions:  
-insertItem:
-handler: 
-events:
-- http:
-  path: /item
-  method: post
-fetchItems:
-handler: 
-events:
-- http:
-  path: /items
-  method: get
-fetchItem:
-handler: 
-events:
-- http:
-  path: /items/{id}
-  method: get
-updateItem:
-handler: 
-events:
-- http:
-  path: /items/{id}
-  method: put
-```
+  functions:
+  hello:
+    handler: src/hello.handler
+    events:
+      - http:
+          path: /
+          method: get
+  insertItem:
+    handler: src/insertItem.handler
+    events:
+      - http:
+          path: /item
+          method: post
+  fetchItems:
+    handler: src/fetchItems.handler
+    events:
+      - http:
+          path: /items
+          method: get
+  fetchItem:
+    handler: src/fetchItem.handler
+    events:
+      - http:
+          path: /items/{id}
+          method: get
+  updateItem:
+    handler: src/updateItem.handler
+    events:
+      - http:
+          path: /items/{id}
+          method: put
+  ```
 
 
