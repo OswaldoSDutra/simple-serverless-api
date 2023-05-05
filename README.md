@@ -38,7 +38,6 @@ Login/Register: No
 Update: No
 Type: aws-java-maven
 ```
-
 #### DynamoDB
 Atualizar o arquivo serverless.yml
 ```
@@ -58,48 +57,48 @@ resources:
 ```
 #### Desenvolver funções lambda
 	
- 	- Obter arn da tabela no DynamoDB AWS Console -> DynamoDB -> Overview -> Amazon Resource Name (ARN)
-	- Atualizar arquivo serverless.yml com o código a seguir, abaixo do ```region:```
-  ```
-	iam:
-      role:
-          statements:
-            - Effect: Allow
-              Action:
-                - dynamodb:PutItem
-                - dynamodb:UpdateItem
-                - dynamodb:GetItem
-                - dynamodb:Scan
-              Resource:
-                - arn:aws:dynamodb:us-east-1:167880115321:table/ItemTableNew
-     ```
-  - Atualizar lista de funções no arquivo serverless.yml
-  ```
-  functions:  
-  insertItem:
-    handler: 
-    events:
-      - http:
-          path: /item
-          method: post
-  fetchItems:
-    handler: 
-    events:
-      - http:
-          path: /items
-          method: get
-  fetchItem:
-    handler: 
-    events:
-      - http:
-          path: /items/{id}
-          method: get
-  updateItem:
-    handler: 
-    events:
-      - http:
-          path: /items/{id}
-          method: put
-  ```
+- Obter arn da tabela no DynamoDB AWS Console -> DynamoDB -> Overview -> Amazon Resource Name (ARN)
+- Atualizar arquivo serverless.yml com a role abaixo
+```
+iam:
+role:
+  statements:
+    - Effect: Allow
+      Action:
+	- dynamodb:PutItem
+	- dynamodb:UpdateItem
+	- dynamodb:GetItem
+	- dynamodb:Scan
+      Resource:
+	- arn:
+```
+- Atualizar lista de funções no arquivo serverless.yml
+```
+functions:  
+insertItem:
+handler: 
+events:
+- http:
+  path: /item
+  method: post
+fetchItems:
+handler: 
+events:
+- http:
+  path: /items
+  method: get
+fetchItem:
+handler: 
+events:
+- http:
+  path: /items/{id}
+  method: get
+updateItem:
+handler: 
+events:
+- http:
+  path: /items/{id}
+  method: put
+```
 
 
