@@ -1,6 +1,15 @@
-# package directories
-node_modules
-jspm_packages
+*.class
+.idea
+target
+/bin/
+/.settings/
+.project
+.classpath
+
+# Package Files
+*.jar
+*.war
+*.ear
 
 # Serverless directories
 .serverless
