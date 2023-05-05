@@ -1,23 +1,23 @@
 <!--
-title: 'AWS Simple HTTP Endpoint example in NodeJS'
-description: 'This template demonstrates how to make a simple REST API with Node.js running on AWS Lambda and API Gateway using the traditional Serverless Framework.'
+title: 'AWS Simple HTTP Endpoint example in JAVA'
+description: 'This template demonstrates how to make a simple REST API with JAVA running on AWS Lambda and API Gateway using the traditional Serverless Framework.'
 layout: Doc
 framework: v2
 platform: AWS
-language: nodeJS
+language: JAVA
 authorLink: 'https://github.com/serverless'
 authorName: 'Serverless, inc.'
 authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 -->
 
-# API Node.js com Serverless Framework em ambiente AWS
+# API JAVA com Serverless Framework em ambiente AWS
 
-Este repositório contém o código fonte do Live Coding da DIO no dia 29/07/2021. Neste projeto vamos criar uma infraestrutra em nuvem AWS com API Gateway, DynamoDB, AWS Lambda e AWS CloudFormation utilizando o framework Serverless para o desenvolvimento baseada em Infraestrutura as a Code.
+Este repositório contém código fonte basedo no projeto Live Coding da DIO no dia 29/07/2021. Neste projeto vamos criar uma infraestrutra em nuvem AWS com API Gateway, DynamoDB, AWS Lambda e AWS CloudFormation utilizando o framework Serverless para o desenvolvimento baseada em Infraestrutura as a Code.
 
 ## Etapas
 
 Pré requisitos: 
- - possuir uma conta na AWS e instalar Node.js na máquina.
+ - possuir uma conta na AWS e instalar JAVA SDK na máquina.
  - Instalar o AWS CLI: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html
 
 ### Setup Inicial
@@ -36,33 +36,9 @@ Pré requisitos:
 $ serverless
 Login/Register: No
 Update: No
-Type: Node.js REST API
-Name: dio-live
-```
-```
-$ cd dio-live
-$ code .
-``` 
-- No arquivo ```serverless.yml``` adicionar a região ```region: us-east-1``` dentro do escopo de ```provider:```
-- Salvar e realizar o deploy ```$ serverless deploy -v```
+Type: aws-java-maven
 
 #### Estruturar o código
-
-- Criar o diretório "src" e mover o arquivo "handler.js" para dentro dele
-- Renomear o arquivo "handler.js" para "hello.js"
-- Atualizar o código 
-```
-const hello = async (event) => {
-/////
-module.exports = {
-    handler:hello
-}
-```
-- Atualizar o arquivo "serverless.yml "
-```
-handler: src/hello.handler
-```
-```$ serverless deploy -v ```
 
 #### DynamoDB
 Atualizar o arquivo serverless.yml
@@ -72,7 +48,7 @@ resources:
     ItemTable:
       Type: AWS::DynamoDB::Table
       Properties:
-          TableName: ItemTable
+          TableName: ItemTableNew
           BillingMode: PAY_PER_REQUEST
           AttributeDefinitions:
             - AttributeName: id
@@ -82,8 +58,7 @@ resources:
               KeyType: HASH
 ```
 #### Desenvolver funções lambda
-
-	- Pasta /src do repositório
+	
  	- Obter arn da tabela no DynamoDB AWS Console -> DynamoDB -> Overview -> Amazon Resource Name (ARN)
 	- Atualizar arquivo serverless.yml com o código a seguir, abaixo do ```region:```
   ```
@@ -97,43 +72,31 @@ resources:
                 - dynamodb:GetItem
                 - dynamodb:Scan
               Resource:
-                - arn:aws:dynamodb:us-east-1:167880115321:table/ItemTable
-  ```
-  
-   - Instalar dependências
-
-   ```npm init```
-   ```npm i uuid aws-sdk```
-   
+                - arn:aws:dynamodb:us-east-1:167880115321:table/ItemTableNew
+     
   - Atualizar lista de funções no arquivo serverless.yml
   ```
-  functions:
-  hello:
-    handler: src/hello.handler
-    events:
-      - http:
-          path: /
-          method: get
+  functions:  
   insertItem:
-    handler: src/insertItem.handler
+    handler: 
     events:
       - http:
           path: /item
           method: post
   fetchItems:
-    handler: src/fetchItems.handler
+    handler: 
     events:
       - http:
           path: /items
           method: get
   fetchItem:
-    handler: src/fetchItem.handler
+    handler: 
     events:
       - http:
           path: /items/{id}
           method: get
   updateItem:
-    handler: src/updateItem.handler
+    handler: 
     events:
       - http:
           path: /items/{id}
