@@ -26,7 +26,7 @@ Pré requisitos:
 
 - Criar usuário: AWS Management Console -> IAM Dashboard -> Create New User -> <nome do usuário> -> Permissions "Administrator Access" -> Programmatic Access -> Dowload Keys
 - No terminal: ```$ aws configure``` -> colar as credenciais geradas anteriormente
-- 
+
 #### Configurar o framework Serverless
 ```$ npm i -g serverless```
 
@@ -37,8 +37,7 @@ $ serverless
 Login/Register: No
 Update: No
 Type: aws-java-maven
-
-#### Estruturar o código
+```
 
 #### DynamoDB
 Atualizar o arquivo serverless.yml
@@ -73,7 +72,7 @@ resources:
                 - dynamodb:Scan
               Resource:
                 - arn:aws:dynamodb:us-east-1:167880115321:table/ItemTableNew
-     
+     ```
   - Atualizar lista de funções no arquivo serverless.yml
   ```
   functions:  
